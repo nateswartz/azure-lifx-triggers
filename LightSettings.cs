@@ -9,4 +9,9 @@
         public double Infrared { get; set; }
         public bool Fast { get; set; }
     }
+
+    public class LightStatus
+    {
+        public bool Connected { get; set; }
+    }
 }
