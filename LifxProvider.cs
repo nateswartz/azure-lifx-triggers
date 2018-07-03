@@ -29,7 +29,7 @@ namespace lifxtriggers
             };
         }
 
-        public void UpdateLight(string lightID, LightSettings settings, TraceWriter log)
+        public bool UpdateLight(string lightID, LightSettings settings)
         {
             var json = JsonConvert.SerializeObject(settings, _settings);
             var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
@@ -38,11 +38,11 @@ namespace lifxtriggers
 
             if (putResponse.IsSuccessStatusCode)
             {
-                log.Info("Successfully updated light.");
+                return false;
             }
             else
             {
-                log.Info("Failed to update light.");
+                return true;
             }
         }
 

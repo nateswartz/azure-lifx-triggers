@@ -18,7 +18,21 @@ namespace lifxtriggers
             };
 
             var provider = new LifxProvider();
-            provider.UpdateLight(lightID, settings, log);
+            var lightUpdated = provider.UpdateLight(lightID, settings);
+
+            if (lightUpdated)
+            {
+                log.Info("Successfully updated light.");
+            }
+            else
+            {
+                log.Info("Failed to update light.");
+                var emailProvider = new EmailProvider();
+                var emailSent = emailProvider.SendEmail("Failed to turn off light", "For more details check the Azure function portal.");
+
+                var logMsg = emailSent == true ? "Message Sent" : "Failed to send message";
+                log.Info(logMsg);
+            }
         }
     }
 }
