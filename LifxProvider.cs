@@ -36,14 +36,7 @@ namespace lifxtriggers
 
             var putResponse = _client.PutAsync($"lights/id:{lightID}/state", stringContent).Result;
 
-            if (putResponse.IsSuccessStatusCode)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return putResponse.IsSuccessStatusCode;
         }
 
         public bool IsLightOnline(string lightID)

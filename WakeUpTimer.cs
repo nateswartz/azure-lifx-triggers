@@ -31,7 +31,7 @@ namespace lifxtriggers
                 var emailProvider = new EmailProvider();
                 var emailSent = emailProvider.SendEmail("Failed to turn on light", "For more details check the Azure function portal.");
 
-                var logMsg = emailSent == true ? "Message Sent" : "Failed to send message";
+                var logMsg = emailSent ? "Message Sent" : "Failed to send message";
                 log.Info(logMsg);
             }
         }
