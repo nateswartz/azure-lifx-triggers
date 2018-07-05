@@ -24,7 +24,7 @@ namespace lifxtriggers
             var msg = MailHelper.CreateSingleEmail(from, _defaultToAddress, subject, content, content);
             var response = _client.SendEmailAsync(msg).Result;
 
-            return response.StatusCode == System.Net.HttpStatusCode.Accepted ? true : false;
+            return response.StatusCode == System.Net.HttpStatusCode.Accepted;
         }
     }
 }

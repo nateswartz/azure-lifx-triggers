@@ -1,5 +1,4 @@
-﻿using Microsoft.Azure.WebJobs.Host;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
@@ -14,6 +13,7 @@ namespace lifxtriggers
     {
         private HttpClient _client;
         private JsonSerializerSettings _settings;
+        private const string _lifxEndpoint = "https://api.lifx.com/v1/";
 
         public LifxProvider()
         {
@@ -22,7 +22,7 @@ namespace lifxtriggers
             new AuthenticationHeaderValue(
                 "Bearer",
                 Environment.GetEnvironmentVariable("LifxApiToken", EnvironmentVariableTarget.Process));
-            _client.BaseAddress = new Uri("https://api.lifx.com/v1/");
+            _client.BaseAddress = new Uri(_lifxEndpoint);
             _settings = new JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver()

@@ -26,7 +26,7 @@ namespace lifxtriggers
                 var emailProvider = new EmailProvider();
                 var emailSent = emailProvider.SendEmail("Lifx connection is down", "For more details check the Azure function portal.");
 
-                var logMsg = emailSent == true ? "Message Sent" : "Failed to send message";
+                var logMsg = emailSent ? "Message Sent" : "Failed to send message";
                 log.Info(logMsg);
             }
         }
