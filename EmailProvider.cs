@@ -1,6 +1,7 @@
 ﻿using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
+using System.Threading.Tasks;
 
 namespace lifxtriggers
 {
@@ -18,11 +19,11 @@ namespace lifxtriggers
             _defaultToAddress = new EmailAddress(Environment.GetEnvironmentVariable("EmailForNotification"));
         }
 
-        public bool SendEmail(string subject, string content)
+        public async Task<bool> SendEmailAsync(string subject, string content)
         {
             var from = new EmailAddress(_defaultFromAddress, _defaultFromName);
             var msg = MailHelper.CreateSingleEmail(from, _defaultToAddress, subject, content, content);
-            var response = _client.SendEmailAsync(msg).Result;
+            var response = await _client.SendEmailAsync(msg);
 
             return response.StatusCode == System.Net.HttpStatusCode.Accepted;
         }

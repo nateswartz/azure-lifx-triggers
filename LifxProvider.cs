@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace lifxtriggers
 {
@@ -28,20 +29,20 @@ namespace lifxtriggers
             };
         }
 
-        public bool UpdateLight(string lightID, LightSettings settings)
+        public async Task<bool> UpdateLightAsync(string lightID, LightSettings settings)
         {
             var json = JsonConvert.SerializeObject(settings, _settings);
             var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var putResponse = _client.PutAsync($"lights/id:{lightID}/state", stringContent).Result;
+            var putResponse = await _client.PutAsync($"lights/id:{lightID}/state", stringContent);
 
             return putResponse.IsSuccessStatusCode;
         }
 
-        public bool IsLightOnline(string lightID)
+        public async Task<bool> IsLightOnlineAsync(string lightID)
         {
-            var getResponse = _client.GetAsync($"lights/id:{lightID}").Result;
-            var content = getResponse.Content.ReadAsStringAsync().Result;
+            var getResponse = await _client.GetAsync($"lights/id:{lightID}");
+            var content = await getResponse.Content.ReadAsStringAsync();
             var results = JsonConvert.DeserializeObject<List<LightStatus>>(content, _settings);
             return results.First().Connected;
         }

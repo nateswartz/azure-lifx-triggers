@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
 
@@ -7,14 +8,13 @@ namespace lifxtriggers
     public static class IncreaseBrightnessForDayTimer
     {
         [FunctionName("IncreaseBrightnessForDayTimer")]
-        public static void Run([TimerTrigger("0 40 10 * * *")]TimerInfo myTimer, TraceWriter log)
+        public async static Task Run([TimerTrigger("0 40 10 * * *")]TimerInfo myTimer, TraceWriter log)
         {
-            log.Info($"C# Timer trigger function executed at: {DateTime.Now}");
             var settings = new LightSettings
             {
                 Brightness = 0.3,
             };
-            LightHelper.UpdateLight(settings, "Failed to increase brightness", log);
+            await LightHelper.UpdateLightAsync(settings, "Failed to increase brightness", log);
         }
     }
 }
