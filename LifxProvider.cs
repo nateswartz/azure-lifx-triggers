@@ -13,16 +13,15 @@ namespace lifxtriggers
     {
         private HttpClient _client;
         private JsonSerializerSettings _settings;
-        private const string _lifxEndpoint = "https://api.lifx.com/v1/";
 
         public LifxProvider()
         {
+            var lifxToken = Environment.GetEnvironmentVariable("LifxApiToken", EnvironmentVariableTarget.Process);
+            var lifxEndpoint = Environment.GetEnvironmentVariable("LifxEndpoint", EnvironmentVariableTarget.Process);
+
             _client = new HttpClient();
-            _client.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue(
-                "Bearer",
-                Environment.GetEnvironmentVariable("LifxApiToken", EnvironmentVariableTarget.Process));
-            _client.BaseAddress = new Uri(_lifxEndpoint);
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", lifxToken);
+            _client.BaseAddress = new Uri(lifxEndpoint);
             _settings = new JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
