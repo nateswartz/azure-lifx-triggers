@@ -8,11 +8,11 @@ namespace lifxtriggers
     public static class IncreaseBrightnessForDayTimer
     {
         [FunctionName("IncreaseBrightnessForDayTimer")]
-        public async static Task Run([TimerTrigger("0 40 10 * * *")]TimerInfo myTimer, TraceWriter log)
+        public async static Task Run([TimerTrigger("0 0 11 * * *")]TimerInfo myTimer, TraceWriter log)
         {
             var settings = new LightSettings
             {
-                Brightness = 0.3,
+                Brightness = 0.2,
             };
             await LightHelper.UpdateLightAsync(settings, "Failed to increase brightness", log);
         }

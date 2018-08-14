@@ -8,7 +8,7 @@ namespace lifxtriggers
     public static class CheckStatus
     {
         [FunctionName("CheckStatus")]
-        public async static Task Run([TimerTrigger("0 0 * * * *")]TimerInfo myTimer, TraceWriter log)
+        public async static Task Run([TimerTrigger("0 0 */2 * * *")]TimerInfo myTimer, TraceWriter log)
         {
             var lightID = Environment.GetEnvironmentVariable("LightId", EnvironmentVariableTarget.Process);
             var provider = new LifxProvider();
