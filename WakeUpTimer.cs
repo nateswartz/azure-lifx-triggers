@@ -8,7 +8,7 @@ namespace lifxtriggers
     public static class WakeUpTimer
     {
         [FunctionName("WakeUpTimer")]
-        public async static Task Run([TimerTrigger("0 15 10 * * *")]TimerInfo myTimer, TraceWriter log)
+        public async static Task Run([TimerTrigger("0 15 11 * * *")]TimerInfo myTimer, TraceWriter log)
         {
             var settings = new LightSettings
             {

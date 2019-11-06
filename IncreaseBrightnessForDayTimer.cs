@@ -8,7 +8,7 @@ namespace lifxtriggers
     public static class IncreaseBrightnessForDayTimer
     {
         [FunctionName("IncreaseBrightnessForDayTimer")]
-        public async static Task Run([TimerTrigger("0 0 11 * * *")]TimerInfo myTimer, TraceWriter log)
+        public async static Task Run([TimerTrigger("0 0 12 * * *")]TimerInfo myTimer, TraceWriter log)
         {
             var settings = new LightSettings
             {
